@@ -4,9 +4,9 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 
 module.exports = {
-  entry:  "./home",
+  entry:  "dist/home.js",
   output: {
-    filename: "build.js",
+    filename: "dist/build.js",
     library:  "home"
   }
 
