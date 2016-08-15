@@ -1,5 +1,5 @@
 {
-  "name": "testMochaChai",
+  "name": "webpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DeemaJS/testMochaChai.git"
+    "url": "git+https://github.com/DeemaJS/webpack.git"
   },
   "keywords": [],
   "author": "Deema Lee <deeema@outlook.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DeemaJS/testMochaChai/issues"
+    "url": "https://github.com/DeemaJS/webpack/issues"
   },
-  "homepage": "https://github.com/DeemaJS/testMochaChai#readme",
+  "homepage": "https://github.com/DeemaJS/webpack/#readme",
   "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
@@ -26,5 +26,8 @@
     "mocha": "^2.5.3",
     "sinon": "^1.17.4",
     "webpack": "^1.13.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4"
   }
 }
