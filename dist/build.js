@@ -1,82 +1,31 @@
-var home =
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+"use strict";
 
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+var home = function (e) {
+  function t(r) {
+    if (u[r]) return u[r].exports;
+    var o = u[r] = { exports: {}, id: r, loaded: !1 };
+    return e[r].call(o.exports, o, o.exports, t), o.loaded = !0, o.exports;
+  }
 
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
+  var u = {};
+  return t.m = e, t.c = u, t.p = "", t(0);
+}([function (e, t, u) {
+  "use strict";
 
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
+  var r = u(1)["default"],
+      o = u(2),
+      n = r(o);
+  n["default"]("home"), t.welcome = n["default"];
+}, function (e, t) {
+  "use strict";
 
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+  t["default"] = function (e) {
+    return e && e.__esModule ? e : { "default": e };
+  }, t.__esModule = !0;
+}, function (e, t) {
+  "use strict";
 
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-
-
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _welcome = __webpack_require__(1);
-
-	var _welcome2 = _interopRequireDefault(_welcome);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	(0, _welcome2.default)("home");
-
-	exports.welcome = _welcome2.default;
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (message) {
-
-	  if (NODE_ENV == 'development') {
-	    console.log(message);
-	  }
-
-	  alert('Welcome ' + message);
-	};
-
-	;
-
-/***/ }
-/******/ ]);
+  Object.defineProperty(t, "__esModule", { value: !0 }), t["default"] = function (e) {
+    alert("Welcome " + e);
+  }, e.exports = t["default"];
+}]);

@@ -10,7 +10,7 @@ module.exports = {
     library: "home"
   }
 
-  /*watch: NODE_ENV == 'development',
+ watch: NODE_ENV == 'development',
    watchOptions: {
     aggregateTimeout: 100
   },
@@ -35,7 +35,7 @@ module.exports = {
       test:   /\.js$/,
       loader: 'babel?optional[]=runtime'
     }]
-   }*/
+   }
 
 };
 
