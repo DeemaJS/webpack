@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: "./dist/build.js",
     library: "home"
-  }
+  },
 
  watch: NODE_ENV == 'development',
    watchOptions: {
@@ -33,7 +33,7 @@ module.exports = {
     module: {
      loaders: [{
       test:   /\.js$/,
-      loader: 'babel?optional[]=runtime'
+      loader: 'babel?presets[]=es2015'
     }]
    }
 
