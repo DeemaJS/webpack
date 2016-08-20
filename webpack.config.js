@@ -39,7 +39,7 @@ module.exports = {
 
 };
 
-/*if (NODE_ENV == 'production') {
+if (NODE_ENV == 'production') {
   module.exports.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -50,4 +50,4 @@ module.exports = {
         }
       })
   );
-}*/
+}
