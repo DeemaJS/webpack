@@ -23,7 +23,8 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.NoErrorsPlugin()
+     // require.context('./locale', true, /^\.\//) => require.context('./locale', true, /ru|en/)
+    new webpack.ContextReplacementPlugin( /node_modules\/moment\/locale/, /ru|en-gb/)
   ],
 
   resolve: {
