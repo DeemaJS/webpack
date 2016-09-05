@@ -1,6 +1,6 @@
 "use strict";
 
-/*let moment = require('moment');*/
+let moment = require('moment');
 
 let today = moment(new Date()).locale('ru');
 

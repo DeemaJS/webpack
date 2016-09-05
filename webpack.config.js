@@ -11,9 +11,9 @@ module.exports = {
   },
 
   output: {
-    path:     __dirname + '/public/js',
+    path:       __dirname + '/public/js',
     publicPath: '/js/',  //   /js/app.js
-    filename: "[name].js"
+    filename:   "[name].js"
   },
 
   watch: NODE_ENV == 'development',
@@ -23,8 +23,7 @@ module.exports = {
   },
 
   plugins: [
-     // require.context('./locale', true, /^\.\//) => require.context('./locale', true, /ru|en/)
-    new webpack.ContextReplacementPlugin( /node_modules\/moment\/locale/, /ru|en-gb/)
+    new webpack.IgnorePlugin(/\.\/locale/)
   ],
 
   resolve: {
