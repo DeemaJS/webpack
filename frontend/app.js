@@ -1,8 +1,23 @@
 "use strict";
 
-let moment = require('moment');
+document.getElementById('loginButton').onclick = function() {
 
-let today = moment(new Date()).locale('ru');
+  // ======== Способ 1 (require.ensure) ==
+  require.ensure([], function(require) {
+    let login = require('./login');
 
-alert(today.format('DD MMM YYYY'));
+    login();
+  }, 'auth');
 
+};
+
+document.getElementById('logoutButton').onclick = function() {
+
+  // ======== Способ 1 (require.ensure) ==
+  require.ensure([], function(require) {
+    let logout = require('./logout');
+
+    logout();
+  }, 'auth');
+
+};
