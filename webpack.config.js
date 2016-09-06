@@ -7,14 +7,13 @@ module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    home:  "./home",
-    about: "./about"
+    app: './app'
   },
 
   output: {
-    path:     __dirname + '/public',
-    filename: "[name].js",
-    library:  "[name]"
+    path:     __dirname + '/public/js',
+    publicPath: '/js/',  //   /js/app.js
+    filename: "[name].js"
   },
 
   watch: NODE_ENV == 'development',
@@ -23,17 +22,8 @@ module.exports = {
     aggregateTimeout: 100
   },
 
-  devtool: NODE_ENV == 'development' ? "cheap-inline-module-source-map" : null,
-
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify(NODE_ENV),
-      LANG:     JSON.stringify('ru')
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "common"
-    })
+    new webpack.NoErrorsPlugin()
   ],
 
   resolve: {
@@ -45,17 +35,8 @@ module.exports = {
     modulesDirectories: ['node_modules'],
     moduleTemplates:    ['*-loader', '*'],
     extensions:         ['', '.js']
-  },
-
-
-  module: {
-
-    loaders: [{
-      test:   /\.js$/,
-      loader: 'babel?optional[]=runtime'
-    }]
-
   }
+
 };
 
 
