@@ -1,54 +1,34 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const webpack = require('webpack');
-
 module.exports = {
   context: __dirname + '/frontend',
-
-  entry: {
-    app: './app'
+  entry:   './main',
+  output:  {
+    path:     __dirname + '/public',
+    publicPath: '/',
+    filename: '[name].js'
   },
 
-  output: {
-    path:     __dirname + '/public/js',
-    publicPath: '/js/',  //   /js/app.js
-    filename: "[name].js"
-  },
+  module: {
 
-  watch: NODE_ENV == 'development',
+    loaders: [{
+      test:   /\.js$/,
+      loader: "babel?presets[]=es2015"
+    }, {
+      test:   /\.jade$/,
+      loader: "jade"
+    }, {
+      test:   /\.css$/,
+      // .../node_modules/css-loader/index.js!.../node_modules/autoprefixer-loader/index.js?browsers=last 2 versions!.../frontend/menu/menu.css
+      loader: 'style!css!autoprefixer?browsers=last 2 versions'
+    }, {
+      test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+      loader: 'file?name=[path][name].[ext]'
+    }]
 
-  watchOptions: {
-    aggregateTimeout: 100
-  },
-
-  plugins: [
-    new webpack.NoErrorsPlugin()
-  ],
-
-  resolve: {
-    modulesDirectories: ['node_modules'],
-    extensions:         ['', '.js']
-  },
-
-  resolveLoader: {
-    modulesDirectories: ['node_modules'],
-    moduleTemplates:    ['*-loader', '*'],
-    extensions:         ['', '.js']
   }
 
 };
 
 
-if (NODE_ENV == 'production') {
-  module.exports.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          // don't show unreachable variables etc
-          warnings:     false,
-          drop_console: true,
-          unsafe:       true
-        }
-      })
-  );
-}
+
