@@ -1,15 +1,17 @@
 'use strict';
 
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
   context: __dirname + '/frontend',
-  entry:   './main',
+  entry:  {
+    main: './main'
+  },
   output:  {
     path:     __dirname + '/public',
     publicPath: '/',
     filename: '[name].js'
   },
-
-  devtool: 'inline-source-map',
 
   module: {
 
@@ -20,21 +22,18 @@ module.exports = {
       test:   /\.jade$/,
       loader: "jade"
     }, {
-      test:   /\.css$/,
-      loader: 'style!css!autoprefixer?browsers=last 2 versions'
-    }, {
       test:   /\.styl$/,
-      loader: 'style!css!autoprefixer?browsers=last 2 versions!stylus'
+      loader: ExtractTextPlugin.extract('css!stylus?resolve url')
     }, {
       test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
       loader: 'file?name=[path][name].[ext]'
     }]
 
   },
-  stylus: {
-    preferPathResolver: 'webpack'
-  }
 
+  plugins: [
+    new ExtractTextPlugin('[name].css', {allChunks: true})
+  ]
 };
 
 
