@@ -9,6 +9,8 @@ module.exports = {
     filename: '[name].js'
   },
 
+  devtool: 'inline-source-map',
+
   module: {
 
     loaders: [{
@@ -19,13 +21,18 @@ module.exports = {
       loader: "jade"
     }, {
       test:   /\.css$/,
-      // .../node_modules/css-loader/index.js!.../node_modules/autoprefixer-loader/index.js?browsers=last 2 versions!.../frontend/menu/menu.css
       loader: 'style!css!autoprefixer?browsers=last 2 versions'
+    }, {
+      test:   /\.styl$/,
+      loader: 'style!css!autoprefixer?browsers=last 2 versions!stylus'
     }, {
       test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
       loader: 'file?name=[path][name].[ext]'
     }]
 
+  },
+  stylus: {
+    preferPathResolver: 'webpack'
   }
 
 };
