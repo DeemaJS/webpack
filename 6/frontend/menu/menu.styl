@@ -1,7 +1,9 @@
+@require '../pics'
+
 .menu
 
   .title
-    background-image url(plus.svg)
+    @extend .plus
     padding 0 6px 0 16px
 
     background-position left 1px
@@ -23,6 +25,5 @@
       display block
 
     .title
-      background-image url(minus.svg)
-
+      @extend .minus
 

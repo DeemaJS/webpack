@@ -1,16 +1,28 @@
 'use strict';
 
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const AssetsPlugin = require('assets-webpack-plugin');
+const rimraf = require('rimraf');
 
 module.exports = {
   context: __dirname + '/frontend',
-  entry:  {
-    main: './main'
+  entry:   {
+    home:   './home',
+    about:  './about',
+    common: './common'
   },
   output:  {
-    path:     __dirname + '/public',
-    publicPath: '/',
-    filename: '[name].js'
+    path:          __dirname + '/public/assets',
+    publicPath:    '/assets/',
+    filename:      '[name].js',
+    chunkFilename: '[id].js',
+    library:       '[name]'
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.styl']
   },
 
   module: {
@@ -32,9 +44,18 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin('[name].css', {allChunks: true})
+    {
+      apply: (compiler) => {
+        rimraf.sync(compiler.options.output.path);
+      }
+    },
+    new ExtractTextPlugin('[name].css', {allChunks: true}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common'
+    }),
+    new AssetsPlugin({
+      filename: 'assets.json',
+      path:     __dirname + '/public/assets'
+    })
   ]
 };
-
-
-
