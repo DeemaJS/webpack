@@ -1,8 +1,8 @@
 'use strict';
 
-import './menu.styl';
-
 import template from './menu.jade';
+
+require('./menu.styl');
 
 export default class Menu {
   constructor(options) {
@@ -16,7 +16,6 @@ export default class Menu {
     this.titleElem.onclick = () => this.elem.classList.toggle('open');
 
     this.titleElem.onmousedown = () => false;
-
   }
 }
 

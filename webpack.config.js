@@ -1,70 +1,76 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const rimraf = require('rimraf');
-
-function addHash(template, hash) {
-  return NODE_ENV == 'production' ?
-      template.replace(/\.[^.]+$/, `.[${hash}]$&`) : template; /*`${template}?hash=[${hash}]`*/
-}
+let webpack = require('webpack');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   context: __dirname + '/frontend',
   entry:   {
-    home:   './home',
-    about:  './about',
-    common: './common'
+    main: './main'
   },
   output:  {
-    path:          __dirname + '/public/assets',
-    publicPath:    '/assets/',
-    filename:      addHash('[name].js', 'chunkhash'),
-    chunkFilename: addHash('[id].js', 'chunkhash'),
-    library:       '[name]'
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.styl']
+    path:       __dirname + '/public',
+    publicPath: '/',
+    filename:   '[name].js'
   },
 
   module: {
 
     loaders: [{
       test:   /\.js$/,
+      include: __dirname + '/frontend',
       loader: "babel?presets[]=es2015"
     }, {
       test:   /\.jade$/,
       loader: "jade"
     }, {
       test:   /\.styl$/,
-      loader: ExtractTextPlugin.extract('css!stylus?resolve url')
+      loader: 'style!css!stylus?resolve url'
     }, {
       test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-      loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+      loader: 'file?name=[name].[ext]?[hash]'
     }]
 
   },
 
-  plugins: [
-    {
-      apply: (compiler) => {
-        rimraf.sync(compiler.options.output.path);
+  devServer: {
+
+    host: 'localhost', // default
+    port: 8080, // default
+
+    contentBase: __dirname + '/backend', // static files, cwd() by default, false to disable
+    historyApiFallback: true // if static file not found, go /index.html
+
+
+
+    /*
+
+    // middlware ->
+    //   proxy ->
+    //     historyApiFallback ? -> historyApiFallback, middleware
+    //       -> contentBase
+
+    proxy: [{ // array in proxy allows regexp path so using it
+      path: "dynamic/* or /regexp/",
+      host: "http://proxy.host", // if another HOST header needed for proxy,
+      bypass: function(req, res, options) {
+        // return URL to rewrite req.url and SKIP PROXY
+        // return false otherwise
+      },
+      rewrite: function(req, options) {
+        // do something with req if needed
+      },
+      configure: function(proxy) {
+        // do something with http-proxy server instance if needed (add handlers etc)
       }
-    },
-    new ExtractTextPlugin(addHash('[name].css', 'contenthash'), {allChunks: true}),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common'
-    }),
-    new HtmlWebpackPlugin({
-      filename: './about.html',
-      chunks: ['common', 'about']
-    }),
-    new HtmlWebpackPlugin({
-      filename: './home.html',
-      chunks: ['common', 'home']
-    })
-  ]
+    }],
+
+    contentBase: __dirname + '/backend', // static files, cwd() by default, false to disable
+    historyApiFallback: true // if static file not found, go /index.html
+
+     */
+  }
 };
+
+
+
